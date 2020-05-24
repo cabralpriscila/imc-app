@@ -21,6 +21,11 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  TextEditingController nome = TextEditingController();
+  TextEditingController peso = TextEditingController();
+  TextEditingController altura = TextEditingController();
+  String mensagem = "";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,6 +42,7 @@ class _HomeState extends State<Home> {
             Padding(
               padding: const EdgeInsets.all(15),
               child: TextField(
+                controller: nome,
                 decoration: InputDecoration(
                     contentPadding: EdgeInsets.all(15),
                     labelText: "Nome",
@@ -46,6 +52,8 @@ class _HomeState extends State<Home> {
             Padding(
               padding: const EdgeInsets.all(15),
               child: TextField(
+                controller: peso,
+                keyboardType: TextInputType.number,
                 decoration: InputDecoration(
                     contentPadding: EdgeInsets.all(15),
                     labelText: "Peso",
@@ -55,6 +63,8 @@ class _HomeState extends State<Home> {
             Padding(
               padding: const EdgeInsets.all(15),
               child: TextField(
+                controller: altura,
+                keyboardType: TextInputType.number,
                 decoration: InputDecoration(
                     contentPadding: EdgeInsets.all(15),
                     labelText: "Altura",
@@ -62,11 +72,18 @@ class _HomeState extends State<Home> {
               ),
             ),
             RaisedButton(
-              onPressed: () {},
+              onPressed: () {
+                final imc = double.parse(peso.text) /
+                    (double.parse(altura.text) * double.parse(altura.text));
+                setState(() {
+                  mensagem = "${nome.text}, seu IMC é $imc";
+                });
+              },
               textColor: Colors.white,
               color: Colors.teal,
               child: Text("Calcular"),
-              ),
+            ),
+            Text(mensagem)
           ],
         ),
       ),
