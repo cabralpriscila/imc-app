@@ -60,7 +60,13 @@ class _HomeState extends State<Home> {
                     labelText: "Altura",
                     border: OutlineInputBorder()),
               ),
-            )
+            ),
+            RaisedButton(
+              onPressed: () {},
+              textColor: Colors.white,
+              color: Colors.teal,
+              child: Text("Calcular"),
+              ),
           ],
         ),
       ),
